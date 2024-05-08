@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UrlRequest;
 use App\Models\Url;
-use Illuminate\Http\Request;
 
 class UrlStoreController extends Controller
 {
     /**
      * Validate the request, then store a new Url model based on the request.
      */
-    public function store(Request $request): Url
+    public function store(UrlRequest $request): Url
     {
-        // TODO validation
+        $validated = $request->validated();
 
         $url = new Url();
 
-        $url->original_url = $request->original_url;
-        $url->shortened_url = $request->shortened_url;
-        $url->redirect_url = $request->redirect_url;
-        $url->user()->associate($request->user_id);
+        $url->original_url = $validated['original_url'];
+        $url->shortened_url = $validated['shortened_url'];
+        $url->redirect_url = $validated['redirect_url'];
+        $url->user()->associate($validated['user_id']);
 
         $url->save();
 
