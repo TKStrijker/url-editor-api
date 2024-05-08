@@ -10,6 +10,12 @@ class Url extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'original_url',
+        'shortened_url',
+        'redirect_url',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
