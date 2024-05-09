@@ -15,7 +15,7 @@ class UrlDestroyController extends Controller
     public function delete(Request $request): int
     {
         $url = Url::where('user_id', $request->user_id)
-            ->find(1);
+            ->findorFail($request->id);
 
         $url->delete();
 

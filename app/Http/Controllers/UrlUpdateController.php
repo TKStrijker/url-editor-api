@@ -14,7 +14,7 @@ class UrlUpdateController extends Controller
     public function update(UrlRequest $request): Url
     {
         $url = Url::where('user_id', $request->user_id)
-            ->find($request->id);
+            ->findOrFail($request->id);
 
         $validated = $request->validated();
 
